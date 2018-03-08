@@ -1,0 +1,29 @@
+{
+  "name": "drum-roll",
+  "version": "0.0.1",
+  "main": "dist/drum-roll.js",
+  "repository": "git@github.com:didierfranc/drum-roll.git",
+  "author": "Didier Franc <didierfranc@me.com>",
+  "license": "MIT",
+  "description": "🥁",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-flow": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "flow-bin": "^0.66.0",
+    "rollup": "^0.56.2",
+    "rollup-plugin-babel": "^4.0.0-beta.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "dependencies": {
+    "react": "^16.3.0-alpha.1",
+    "react-dom": "^16.3.0-alpha.1",
+    "simple-cache-provider": "^0.2.1"
+  },
+  "scripts": {
+    "build": "rollup -c -mw",
+    "size": "gzip -c 'dist/drum-roll.js' | echo gzipped → `wc -c` bytes"
+  }
+}
