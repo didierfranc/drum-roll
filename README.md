@@ -1,12 +1,12 @@
-###### 🚨 This is highly experimental, React APIs will change as highlighted [here](https://github.com/facebook/react/blob/master/packages/simple-cache-provider/README.md#no-really-it-is-unstable), use it with maximum precautions.
+###### 🚨 This is highly experimental, APIs will change as highlighted [here](https://github.com/facebook/react/blob/master/packages/simple-cache-provider/README.md#no-really-it-is-unstable), use it with maximum precautions.
 
 # drum-roll 🥁
 
-A simple way to use the new big thing coming with React: **_suspense_**.
+A simple way to use the new big thing from the React Team: **_simple-cache-provider_**.
 
 ## Requirements
 
-**drum-roll** require **react** and **react-dom** _16.3.0-alpha.1_ or newer, because it depends on **simple-cache-provider** which depends on `React.createContext()`.
+**drum-roll** requires **react** and **react-dom** _16.3.0-alpha.1_ or newer, because it depends on **simple-cache-provider** which depends on `React.createContext()`.
 
 ## How to use it ?
 
