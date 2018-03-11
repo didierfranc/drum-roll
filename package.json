@@ -1,11 +1,12 @@
 {
   "name": "drum-roll",
-  "version": "0.0.1",
+  "version": "1.0.0-beta.2",
   "main": "dist/drum-roll.js",
   "repository": "git@github.com:didierfranc/drum-roll.git",
   "author": "Didier Franc <didierfranc@me.com>",
   "license": "MIT",
   "description": "🥁",
+  "files": ["package.json", "README.md", "dist/"],
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.40",
@@ -17,10 +18,10 @@
     "rollup-plugin-babel": "^4.0.0-beta.0",
     "rollup-plugin-uglify": "^3.0.0"
   },
-  "dependencies": {
-    "react": "^16.3.0-alpha.1",
-    "react-dom": "^16.3.0-alpha.1",
-    "simple-cache-provider": "^0.2.1"
+  "peerDependencies": {
+    "react": "^16.4.0-alpha.0911da3",
+    "react-dom": "^16.4.0-alpha.0911da3",
+    "simple-cache-provider": "^0.3.0-alpha.0911da3"
   },
   "scripts": {
     "build": "rollup -c -mw",

@@ -2,11 +2,11 @@
 
 # drum-roll 🥁
 
-A simple way to use the new big thing from the React Team: **_simple-cache-provider_**.
+A simple way to use the new big thing from the React Team: **_Suspense_**.
 
 ## Requirements
 
-**drum-roll** requires **react** and **react-dom** _16.3.0-alpha.1_ or newer, because it depends on **simple-cache-provider** which depends on `React.createContext()`.
+`drum-roll@next` requires `react@canary` and `react-dom@canary`, because it depends on **React** experimental features.
 
 ## How to use it ?
 
@@ -38,7 +38,7 @@ class App extends Component {
         <div>
           {username && (
             <Fetcher fetcher={getUser(username)} delay={100}>
-              {(data, loading, error) =>
+              {(data, error) =>
                 data ? JSON.stringify(data) : error ? '💥' : '⏳'
               }
             </Fetcher>
@@ -54,5 +54,5 @@ export default App
 
 ## Links
 
-* [drum-roll-example (codesandbox)](https://codesandbox.io/s/github/didierfranc/drum-roll-example/tree/master/)
+* [drum-roll-suspense-example (codesandbox)](https://codesandbox.io/s/github/didierfranc/drum-roll-suspense-example)
 * [Dan Abramov, Beyond React 16](https://www.youtube.com/watch?v=v6iR3Zk4oDY)

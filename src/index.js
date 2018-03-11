@@ -1,5 +1,13 @@
-import { Component } from 'react'
+import React, { Component, Timeout } from 'react'
 import { createCache, createResource } from 'simple-cache-provider'
+
+const compatible = React.version.includes('16.4')
+
+if (!compatible) {
+  console.warn(
+    `🚨 The running version of react is not compatible with the suspense feature → Upgrade react or downgrade drum-roll.`,
+  )
+}
 
 const cache = createCache()
 
@@ -8,56 +16,35 @@ export const createFetcher = resolver => {
   return key => () => resource(cache, key)
 }
 
-const INITIAL = 'initial'
-const LOADING = 'loading'
-const SUCCESS = 'success'
-const FAILURE = 'failure'
+const Renderer = ({ fetcher, children, didExpire, error }) =>
+  error
+    ? children(null, true)
+    : didExpire ? children(null) : children(fetcher())
 
 export class Fetcher extends Component {
-  state = {
-    status: INITIAL,
+  state = { error: false }
+
+  componentDidCatch(e) {
+    this.setState({ error: true })
   }
 
-  load = promise => {
-    try {
-      promise.then(() => {
-        if (this.timeout) clearTimeout(this.timeout)
-        this.setState({ status: SUCCESS })
-      })
-    } catch (e) {
-      this.setState({ status: FAILURE })
-    }
-  }
-
-  startTimeout = () => {
-    this.timeout = setTimeout(
-      () => this.setState({ status: LOADING }),
-      this.props.delay,
-    )
-  }
-
-  static getDerivedStateFromProps = () => ({ status: INITIAL })
+  static getDerivedStateFromProps = () => ({ error: false })
 
   render() {
-    const { children, fetcher } = this.props
-    const { status } = this.state
+    const { fetcher, children } = this.props
+    const { error } = this.state
 
-    switch (status) {
-      case INITIAL: {
-        try {
-          return children(fetcher(), false, false)
-        } catch (e) {
-          this.load(e)
-          this.startTimeout()
-          return null
-        }
-      }
-      case LOADING:
-        return children(false, true, false)
-      case SUCCESS:
-        return children(fetcher(), false, false)
-      case FAILURE:
-        return children(false, false, true)
-    }
+    return compatible ? (
+      <Timeout ms={this.props.delay || 1000}>
+        {didExpire => (
+          <Renderer
+            error={error}
+            didExpire={didExpire}
+            fetcher={fetcher}
+            children={children}
+          />
+        )}
+      </Timeout>
+    ) : null
   }
 }
